@@ -2,7 +2,7 @@ import { io } from '../../app.js';
 
 class MessageController {
     sendMessageToRoom(req, res, next) {
-        io.to(`${req.body.id}`).emit('DIALOG:SEND_MESSAGE', req.body);
+        io.to(`${req.body.dialogId}`).emit('DIALOG:SEND_MESSAGE', req.body);
         return true;
     }
 }

@@ -19,13 +19,13 @@ export const io = new Server(server, {
 });
 
 io.on('connection',  (socket) => {
-    socket.on('DIALOG:JOIN_TO_DIALOG', ({ id }) => {
-        socket.join(`${id}`);
+    socket.on('DIALOG:JOIN_DIALOG', ({ dialogId, userId }) => {
+        socket.join(`${dialogId}`);
         UsersOnlineInDialog.joinUser(userId, dialogId);
     });
-    socket.on('DIALOG:LEAVE_FROM_DIALOG',  ({ id }) => {
-        socket.leave(`${id}`);
-        UsersOnlineInDialog.leaveUser()
+    socket.on('DIALOG:LEAVE_DIALOG',  ({ userId, dialogId }) => {
+        socket.leave(`${dialogId}`);
+        UsersOnlineInDialog.leaveUser(userId, dialogId);
     });
 });
 
