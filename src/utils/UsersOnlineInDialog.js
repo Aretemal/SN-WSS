@@ -3,7 +3,7 @@ class Dialog {
         this.usersArray = [userId];
         this.dialogId = dialogId;
     }
-    getOnlineUsers = () => {
+    getCountOnlineUsers = () => {
         return this.usersArray.length;
     }
 
@@ -41,6 +41,14 @@ class UsersOnlineInDialog {
             console.log('Error');
         }
     };
+    getCountUsersInDialog = (dialogId) => {
+        const dialog = this.dialogArray.find(dialog => dialogId === dialog.dialogId);
+        if (dialog) {
+            return dialog.getCountOnlineUsers();
+        } else {
+            console.log('Error');
+        }
+    }
 }
 
 export default new UsersOnlineInDialog();
