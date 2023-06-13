@@ -22,10 +22,12 @@ io.on('connection',  (socket) => {
     socket.on('DIALOG:JOIN_DIALOG', ({ dialogId, userId }) => {
         socket.join(`${dialogId}`);
         UsersOnlineInDialog.joinUser(userId, dialogId);
+        io.to(`${dialogId}`).emit('DIALOG:COUNT_USERS',{ count: UsersOnlineInDialog.getCountUsersInDialog(dialogId) });
     });
     socket.on('DIALOG:LEAVE_DIALOG',  ({ userId, dialogId }) => {
         socket.leave(`${dialogId}`);
         UsersOnlineInDialog.leaveUser(userId, dialogId);
+        io.to(`${dialogId}`).emit('DIALOG:COUNT_USERS',{ count: UsersOnlineInDialog.getCountUsersInDialog(dialogId) });
     });
 });
 
