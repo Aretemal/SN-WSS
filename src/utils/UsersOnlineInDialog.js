@@ -14,6 +14,9 @@ class Dialog {
     deleteUser = (id) => {
         this.usersArray = this.usersArray.filter( u => u !== id);
     }
+    findUser = (id) => {
+        return this.usersArray.find( u => u === id);
+    }
     getUsersId = () => {
         return this.usersArray;
     }
@@ -27,7 +30,9 @@ class UsersOnlineInDialog {
     joinUser = (userId, dialogId) => {
         const dialog = this.dialogArray.find(dialog => dialogId === dialog.dialogId);
         if (dialog) {
-            dialog.addUser(userId);
+            if (!dialog.findUser(userId)){
+                dialog.addUser(userId);
+            }
         } else {
             this.dialogArray.push(new Dialog(userId, dialogId));
         }
